@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jessica ❤️ Alex - Nosso Amor</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f7f3ef 0%, #fef5f1 100%);
+      color: #1a1a1a;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* TELA DE BOAS-VINDAS */
+    #welcome-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.8s ease, visibility 0.8s;
+    }
+
+    .welcome-heart {
+      font-size: 80px;
+      animation: heartBeat 1.5s infinite;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .welcome-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: #dc6478;
+      font-weight: 600;
+    }
+
+    /* CONTEÚDO PRINCIPAL */
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 30px 24px 60px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1s ease;
+    }
+
+    .container.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .photo {
+      width: 100%;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(220, 100, 120, 0.15);
+      margin-bottom: 28px;
+      border: 3px solid rgba(220, 100, 120, 0.1);
+    }
+
+    .photo img {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #dc6478 0%, #e8839a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      opacity: 0.75;
+      margin-bottom: 35px;
+      color: #666;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 26px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(220, 100, 120, 0.08);
+    }
+
+    .title {
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+
+    .message {
+      font-size: 24px;
+      line-height: 1.5;
+      font-family: 'Cormorant Garamond', serif;
+      color: #333;
+    }
+
+    .counter {
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #dc6478 0%, #e8839a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .small {
+      opacity: 0.65;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      background: linear-gradient(135deg, #dc6478 0%, #e8839a 100%);
+      color: white;
+      padding: 18px;
+      border-radius: 18px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(220, 100, 120, 0.3);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      opacity: 0.5;
+      font-size: 13px;
+    }
+
+    /* ANIMAÇÕES */
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+    }
+
+    @keyframes confetti {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100px) rotate(360deg); opacity: 0; }
+    }
+
+    .confetti-piece {
+      position: fixed;
+      pointer-events: none;
+      animation: confetti 2s ease-out forwards;
+      z-index: 3000;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85); display: flex; justify-content: center;
+      align-items: center; z-index: 4000; padding: 20px;
+    }
+
+    .modal-content {
+      background: white; padding: 30px; border-radius: 28px;
+      text-align: center; width: 100%; max-width: 400px;
+    }
+
+    audio, video { width: 100%; margin-top: 10px; border-radius: 12px; }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 38px; }
+      .counter { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TELA DE BOAS-VINDAS -->
+<div id="welcome-screen" onclick="startExperience()">
+  <div class="welcome-heart">❤️</div>
+  <div class="welcome-text">Clique para abrir</div>
+</div>
+
+<!-- ÁUDIO DE FUNDO -->
+<audio id="bg-music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container" id="main-content">
+
+  <div class="hero">
+    <div class="photo">
+      <img src="foto.jpeg" alt="Jessica e Alex">
+    </div>
+    <h1>Jessica ❤️ Alex</h1>
+    <div class="subtitle">Algumas histórias merecem ficar pra sempre.</div>
+  </div>
+
+  <div class="card">
+    <div class="title">Mensagem de hoje</div>
+    <div class="message" id="dailyMessage">carregando...</div>
+  </div>
+
+  <div class="card">
+    <div class="title">Nosso tempo junto</div>
+    <div class="counter" id="counter">...</div>
+    <div class="small">Desde 24/09/2010</div>
+  </div>
+
+  <!-- CONTROLE DE MÚSICA -->
+  <div class="card music-control">
+    <div class="title">Nossa Música</div>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+      <button id="music-btn" onclick="toggleMusic()" style="width: auto; padding: 12px 25px; border-radius: 50px;">
+        Pausar Música ⏸️
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="title">Surpresa</div>
+    <button onclick="triggerSurprise()">Clique para descobrir ✨</button>
+  </div>
+
+  <div class="footer">Feito com ❤️ para vocês</div>
+
+</div>
+
+<script>
+  // 1. CONFIGURAÇÕES
+  const startDate = new Date("2010-09-24");
+  
+  const messages = [
+    "Você ainda é meu lugar favorito.",
+    "Eu escolheria você de novo.",
+    "Seu abraço ainda é minha paz.",
+    "Até nos dias difíceis, ainda é você.",
+    "Obrigado por existir na minha vida.",
+    "Algumas pessoas passam. Você ficou.",
+    "Seu sorriso continua sendo meu ponto fraco.",
+    "Nosso amor mora nos detalhes.",
+    "Você faz o mundo parecer mais leve.",
+    "24/09/2010 foi o começo de tudo.",
+    "Com você, tudo faz sentido.",
+    "Você é meu melhor 'e se'.",
+    "Cada dia com você é um presente.",
+    "Seu amor mudou tudo em mim."
+  ];
+
+  const specialDates = {
+    "06-12": "Feliz Dia dos Namorados! ❤️",
+    "09-24": "Hoje é nosso aniversário! 🥂",
+    "12-25": "Feliz Natal, meu amor! 🎄",
+    "01-01": "Mais um ano começando ao seu lado. ✨",
+    "05-23": "Está dando certo! 😍"
+  };
+
+  const surprises = [
+    { type: "text", content: "Você é a melhor parte dos meus dias. ❤️" },
+    { type: "audio", content: "audio.mp3", title: "Uma mensagem pra você 🎙️" },
+    { type: "video", content: "video.mp4", title: "Nossos momentos 🎥" },
+    { type: "text", content: "Prometo continuar escolhendo você todos os dias." }
+  ];
+
+  // 2. FUNÇÕES DE INICIALIZAÇÃO
+  function startExperience() {
+    // Tocar música
+    const music = document.getElementById('bg-music');
+    music.play().catch(e => console.log("Erro ao tocar áudio:", e));
+
+    // Esconder tela de boas-vindas
+    const welcome = document.getElementById('welcome-screen');
+    welcome.style.opacity = '0';
+    welcome.style.visibility = 'hidden';
+
+    // Mostrar conteúdo principal
+    document.getElementById('main-content').classList.add('visible');
+    
+    loadDailyMessage();
+    updateCounter();
+  }
+
+  function toggleMusic() {
+    const music = document.getElementById('bg-music');
+    const btn = document.getElementById('music-btn');
+    
+    if (music.paused) {
+      music.play();
+      btn.innerText = "Pausar Música ⏸️";
+    } else {
+      music.pause();
+      btn.innerText = "Tocar Música ▶️";
+    }
+  }
+
+  function loadDailyMessage() {
+    const now = new Date();
+    const dateKey = `${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    
+    if (specialDates[dateKey]) {
+      document.getElementById("dailyMessage").innerText = specialDates[dateKey];
+    } else {
+      const start = new Date(now.getFullYear(), 0, 0);
+      const dayOfYear = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+      document.getElementById("dailyMessage").innerText = messages[dayOfYear % messages.length];
+    }
+  }
+
+  function updateCounter() {
+    const now = new Date();
+    const diff = now - startDate;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const years = Math.floor(days / 365);
+    const months = Math.floor((days % 365) / 30);
+    const remDays = days % 30;
+    document.getElementById("counter").innerText = `${years} anos, ${months} meses e ${remDays} dias`;
+  }
+
+  // 3. SURPRESAS E EFEITOS
+  function triggerSurprise() {
+    const item = surprises[Math.floor(Math.random() * surprises.length)];
+    createConfetti();
+    showModal(item);
+  }
+
+  function createConfetti() {
+    const colors = ['#dc6478', '#e8839a', '#f5b3c1', '#ffd4e5'];
+    for (let i = 0; i < 30; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti-piece';
+      c.style.left = Math.random() * 100 + '%';
+      c.style.top = '-10px';
+      c.style.width = c.style.height = Math.random() * 8 + 4 + 'px';
+      c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      c.style.borderRadius = '50%';
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 2000);
+    }
+  }
+
+  function showModal(item) {
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    
+    const content = document.createElement('div');
+    content.className = 'modal-content';
+
+    let html = '';
+    if (item.type === "text") html = `<p style="font-size: 24px; font-family: 'Cormorant Garamond', serif;">${item.content}</p>`;
+    else if (item.type === "audio") html = `<h3>${item.title}</h3><audio controls autoplay><source src="${item.content}"></audio>`;
+    else if (item.type === "video") html = `<h3>${item.title}</h3><video controls autoplay><source src="${item.content}"></video>`;
+
+    content.innerHTML = html;
+    const btn = document.createElement('button');
+    btn.innerText = 'Fechar ❤️';
+    btn.style.marginTop = '20px';
+    btn.onclick = () => overlay.remove();
+    
+    content.appendChild(btn);
+    overlay.appendChild(content);
+    document.body.appendChild(overlay);
+  }
+</script>
+
+</body>
+</html>
