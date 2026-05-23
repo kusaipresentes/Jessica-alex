@@ -8,9 +8,175 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-  <style>
-    
-  /* FOOTER PREMIUM */
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:linear-gradient(135deg,#f7f3ef 0%,#fef5f1 100%);
+  color:#1a1a1a;
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+
+/* TELA */
+
+#welcome-screen{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:white;
+  z-index:2000;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  transition:opacity .8s ease, visibility .8s;
+}
+
+.welcome-heart{
+  font-size:80px;
+  animation:heartBeat 1.5s infinite;
+  cursor:pointer;
+  margin-bottom:20px;
+}
+
+.welcome-text{
+  font-family:'Playfair Display',serif;
+  font-size:24px;
+  color:#dc6478;
+  font-weight:600;
+}
+
+/* CONTAINER */
+
+.container{
+  max-width:500px;
+  margin:auto;
+  padding:30px 24px 60px;
+
+  opacity:0;
+  transform:translateY(20px);
+  transition:1s ease;
+}
+
+.container.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.hero{
+  text-align:center;
+  margin-top:20px;
+}
+
+.photo{
+  width:100%;
+  border-radius:28px;
+  overflow:hidden;
+
+  box-shadow:0 15px 40px rgba(220,100,120,.15);
+  margin-bottom:28px;
+
+  border:3px solid rgba(220,100,120,.1);
+}
+
+.photo img{
+  width:100%;
+  display:block;
+}
+
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:48px;
+  font-weight:700;
+  margin-bottom:8px;
+
+  background:linear-gradient(135deg,#dc6478 0%,#e8839a 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+  font-size:15px;
+  opacity:.75;
+  margin-bottom:35px;
+  color:#666;
+}
+
+/* CARDS */
+
+.card{
+  background:white;
+  border-radius:24px;
+  padding:26px;
+  margin-bottom:22px;
+
+  box-shadow:0 8px 25px rgba(0,0,0,.06);
+  border:1px solid rgba(220,100,120,.08);
+}
+
+.title{
+  font-size:13px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  opacity:.5;
+  margin-bottom:14px;
+  font-weight:600;
+}
+
+.message{
+  font-size:24px;
+  line-height:1.5;
+  font-family:'Cormorant Garamond',serif;
+  color:#333;
+}
+
+.counter{
+  font-size:30px;
+  font-weight:700;
+  margin-bottom:8px;
+
+  background:linear-gradient(135deg,#dc6478 0%,#e8839a 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.small{
+  opacity:.65;
+  font-size:14px;
+}
+
+/* BOTÕES */
+
+button{
+  width:100%;
+  border:none;
+
+  background:linear-gradient(135deg,#dc6478 0%,#e8839a 100%);
+  color:white;
+
+  padding:18px;
+  border-radius:18px;
+
+  font-size:15px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  box-shadow:0 8px 20px rgba(220,100,120,.3);
+}
+
+/* FOOTER */
 
 .footer{
   text-align:center;
@@ -22,7 +188,7 @@
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:14px;
+  gap:10px;
 
   font-size:14px;
   color:#8d8d8d;
@@ -31,10 +197,10 @@
 }
 
 .footer-logo{
-  width:42px;
-  opacity:.9;
+  width:90px;
+  opacity:.95;
 
-  filter: drop-shadow(0 5px 10px rgba(0,0,0,.08));
+  filter:drop-shadow(0 5px 10px rgba(0,0,0,.08));
 }
 
 /* SOCIAL */
@@ -43,24 +209,26 @@
   display:flex;
   justify-content:center;
   gap:18px;
-  margin-top:22px;
 }
 
 .social-btn{
   width:56px;
   height:56px;
+
   border-radius:50%;
   background:white;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   text-decoration:none;
 
-  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
 
   color:#e16f89;
 
-  transition:0.3s;
+  transition:.3s;
 }
 
 .social-btn:hover{
@@ -71,195 +239,84 @@
   width:28px;
   height:28px;
 }
-    body {
-      background: linear-gradient(135deg, #f7f3ef 0%, #fef5f1 100%);
-      color: #1a1a1a;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      min-height: 100vh;
-    }
 
-    /* TELA DE BOAS-VINDAS */
-    #welcome-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: white;
-      z-index: 2000;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: opacity 0.8s ease, visibility 0.8s;
-    }
+/* MODAL */
 
-    .welcome-heart {
-      font-size: 80px;
-      animation: heartBeat 1.5s infinite;
-      cursor: pointer;
-      margin-bottom: 20px;
-    }
+.modal-overlay{
+  position:fixed;
+  top:0;
+  left:0;
 
-    .welcome-text {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      color: #dc6478;
-      font-weight: 600;
-    }
+  width:100%;
+  height:100%;
 
-    /* CONTEÚDO PRINCIPAL */
-    .container {
-      max-width: 500px;
-      margin: auto;
-      padding: 30px 24px 60px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 1s ease;
-    }
+  background:rgba(0,0,0,.85);
 
-    .container.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  display:flex;
+  justify-content:center;
+  align-items:center;
 
-    .hero {
-      text-align: center;
-      margin-top: 20px;
-    }
+  z-index:4000;
+  padding:20px;
+}
 
-    .photo {
-      width: 100%;
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: 0 15px 40px rgba(220, 100, 120, 0.15);
-      margin-bottom: 28px;
-      border: 3px solid rgba(220, 100, 120, 0.1);
-    }
+.modal-content{
+  background:white;
+  padding:30px;
+  border-radius:28px;
 
-    .photo img {
-      width: 100%;
-      display: block;
-      height: auto;
-    }
+  text-align:center;
+  width:100%;
+  max-width:400px;
+}
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 48px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      background: linear-gradient(135deg, #dc6478 0%, #e8839a 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+audio,
+video{
+  width:100%;
+  margin-top:10px;
+  border-radius:12px;
+}
 
-    .subtitle {
-      font-size: 15px;
-      opacity: 0.75;
-      margin-bottom: 35px;
-      color: #666;
-    }
+/* ANIMAÇÕES */
 
-    .card {
-      background: white;
-      border-radius: 24px;
-      padding: 26px;
-      margin-bottom: 22px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-      border: 1px solid rgba(220, 100, 120, 0.08);
-    }
+@keyframes heartBeat{
+  0%,100%{transform:scale(1);}
+  25%{transform:scale(1.1);}
+  50%{transform:scale(1);}
+}
 
-    .title {
-      font-size: 13px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      opacity: 0.5;
-      margin-bottom: 14px;
-      font-weight: 600;
-    }
+@keyframes confetti{
+  0%{
+    transform:translateY(0) rotate(0deg);
+    opacity:1;
+  }
 
-    .message {
-      font-size: 24px;
-      line-height: 1.5;
-      font-family: 'Cormorant Garamond', serif;
-      color: #333;
-    }
+  100%{
+    transform:translateY(100px) rotate(360deg);
+    opacity:0;
+  }
+}
 
-    .counter {
-      font-size: 30px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      background: linear-gradient(135deg, #dc6478 0%, #e8839a 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+.confetti-piece{
+  position:fixed;
+  pointer-events:none;
+  animation:confetti 2s ease-out forwards;
+  z-index:3000;
+}
 
-    .small {
-      opacity: 0.65;
-      font-size: 14px;
-    }
+@media(max-width:480px){
 
-    button {
-      width: 100%;
-      border: none;
-      background: linear-gradient(135deg, #dc6478 0%, #e8839a 100%);
-      color: white;
-      padding: 18px;
-      border-radius: 18px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(220, 100, 120, 0.3);
-    }
+  h1{
+    font-size:38px;
+  }
 
-    .footer {
-      text-align: center;
-      margin-top: 40px;
-      opacity: 0.5;
-      font-size: 13px;
-    }
+  .counter{
+    font-size:24px;
+  }
 
-    /* ANIMAÇÕES */
-    @keyframes heartBeat {
-      0%, 100% { transform: scale(1); }
-      25% { transform: scale(1.1); }
-      50% { transform: scale(1); }
-    }
+}
 
-    @keyframes confetti {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100px) rotate(360deg); opacity: 0; }
-    }
-
-    .confetti-piece {
-      position: fixed;
-      pointer-events: none;
-      animation: confetti 2s ease-out forwards;
-      z-index: 3000;
-    }
-
-    /* MODAL */
-    .modal-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.85); display: flex; justify-content: center;
-      align-items: center; z-index: 4000; padding: 20px;
-    }
-
-    .modal-content {
-      background: white; padding: 30px; border-radius: 28px;
-      text-align: center; width: 100%; max-width: 400px;
-    }
-
-    audio, video { width: 100%; margin-top: 10px; border-radius: 12px; }
-
-    @media (max-width: 480px) {
-      h1 { font-size: 38px; }
-      .counter { font-size: 24px; }
-    }
-  </style>
+</style>
 </head>
 <body>
 
