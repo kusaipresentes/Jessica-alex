@@ -1,946 +1,851 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jessica ❤️ Alex - Nosso Amor</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <!-- ÍCONES PROFISSIONAIS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>Jessica ❤️ Alex</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
-    body {
-      background: linear-gradient(135deg, #f7f3ef 0%, #fef5f1 100%);
-      color: #1a1a1a;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      min-height: 100vh;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-    /* TELA DE BOAS-VINDAS */
-    #welcome-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: white;
-      z-index: 2000;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: opacity 0.8s ease, visibility 0.8s;
-    }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    .welcome-heart {
-      font-size: 80px;
-      animation: heartBeat 1.5s infinite;
-      cursor: pointer;
-      margin-bottom: 20px;
-    }
+<style>
 
-    .welcome-text {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      color: #dc6478;
-      font-weight: 600;
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-    /* CONTEÚDO PRINCIPAL */
-    .container {
-      max-width: 500px;
-      margin: auto;
-      padding: 30px 24px 60px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 1s ease;
-    }
+body{
+font-family:'Inter',sans-serif;
+background:
+linear-gradient(135deg,#f8f3f1 0%,#fff8f6 100%);
+color:#222;
+overflow-x:hidden;
+min-height:100vh;
+}
 
-    .container.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* WELCOME */
 
-    .hero {
-      text-align: center;
-      margin-top: 20px;
-    }
+#welcome-screen{
+position:fixed;
+inset:0;
+background:white;
+z-index:9999;
 
-    .photo {
-      width: 100%;
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: 0 15px 40px rgba(220, 100, 120, 0.15);
-      margin-bottom: 28px;
-      border: 3px solid rgba(220, 100, 120, 0.1);
-    }
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 
-    .photo img {
-      width: 100%;
-      display: block;
-      height: auto;
-    }
+transition:.8s;
+}
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 48px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      background: linear-gradient(135deg, #dc6478 0%, #e8839a 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+.welcome-heart{
+font-size:90px;
+cursor:pointer;
+animation:heartbeat 1.4s infinite;
+}
 
-    .subtitle {
-      font-size: 15px;
-      opacity: 0.75;
-      margin-bottom: 35px;
-      color: #666;
-    }
+.welcome-text{
+margin-top:18px;
+font-size:24px;
+font-family:'Playfair Display',serif;
+color:#dc6478;
+}
 
-    .card {
-      background: white;
-      border-radius: 24px;
-      padding: 26px;
-      margin-bottom: 22px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
-      border: 1px solid rgba(220, 100, 120, 0.08);
-    }
+@keyframes heartbeat{
+0%,100%{transform:scale(1);}
+25%{transform:scale(1.08);}
+50%{transform:scale(1);}
+}
 
-    .title {
-      font-size: 13px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      opacity: 0.5;
-      margin-bottom: 14px;
-      font-weight: 600;
-    }
+/* CONTAINER */
 
-    .message {
-      font-size: 24px;
-      line-height: 1.5;
-      font-family: 'Cormorant Garamond', serif;
-      color: #333;
-    }
+.container{
+max-width:520px;
+margin:auto;
+padding:28px 22px 60px;
 
-    .counter {
-      font-size: 30px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      background: linear-gradient(135deg, #dc6478 0%, #e8839a 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+opacity:0;
+transform:translateY(20px);
+transition:1s;
+}
 
-    .small {
-      opacity: 0.65;
-      font-size: 14px;
-    }
+.container.visible{
+opacity:1;
+transform:none;
+}
 
-    button {
-      width: 100%;
-      border: none;
-      background: linear-gradient(135deg, #dc6478 0%, #e8839a 100%);
-      color: white;
-      padding: 18px;
-      border-radius: 18px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(220, 100, 120, 0.3);
-      transition: transform 0.2s;
-    }
+/* HERO */
 
-    button:active { transform: scale(0.98); }
+.hero{
+text-align:center;
+margin-top:20px;
+}
 
-    /* BOTÃO DE MÚSICA COM ONDAS */
-    .music-card {
-      position: relative;
-      overflow: hidden;
-    }
+.photo{
+border-radius:30px;
+overflow:hidden;
 
-    .music-player-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
+box-shadow:
+0 20px 60px rgba(220,100,120,.18);
 
-    .song-info {
-      text-align: center;
-    }
+border:1px solid rgba(255,255,255,.6);
 
-    .song-name {
-      font-weight: 600;
-      font-size: 16px;
-      color: #333;
-      margin-bottom: 5px;
-    }
+margin-bottom:28px;
+}
 
-    .wave-container {
-      display: flex;
-      align-items: flex-end;
-      gap: 3px;
-      height: 30px;
-      margin-bottom: 10px;
-    }
+.photo img{
+width:100%;
+display:block;
+}
 
-    .wave-bar {
-      width: 4px;
-      background: #dc6478;
-      border-radius: 2px;
-      height: 5px;
-      transition: height 0.2s;
-    }
+h1{
+font-family:'Playfair Display',serif;
+font-size:48px;
+line-height:1.1;
 
-    .playing .wave-bar {
-      animation: waveAnim 1s ease-in-out infinite;
-    }
+background:
+linear-gradient(135deg,#dc6478,#ea8da0);
 
-    .playing .wave-bar:nth-child(2) { animation-delay: 0.1s; }
-    .playing .wave-bar:nth-child(3) { animation-delay: 0.2s; }
-    .playing .wave-bar:nth-child(4) { animation-delay: 0.3s; }
-    .playing .wave-bar:nth-child(5) { animation-delay: 0.4s; }
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
 
-    @keyframes waveAnim {
-      0%, 100% { height: 5px; }
-      50% { height: 25px; }
-    }
+.subtitle{
+margin-top:10px;
+font-size:15px;
+color:#777;
+}
 
-    /* RODAPÉ E LOGO */
-    .footer {
-      text-align: center;
-      margin-top: 50px;
-      padding-top: 30px;
-      border-top: 1px solid rgba(0,0,0,0.05);
-    }
+/* CARDS */
 
-    .logo-container {
-      margin-bottom: 20px;
-    }
+.card{
+background:
+rgba(255,255,255,.72);
 
-    .logo-container img {
-      max-width: 120px; /* Ajuste o tamanho da logo aqui */
-      height: auto;
-      opacity: 0.8;
-    }
+backdrop-filter:blur(14px);
 
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
+border:1px solid rgba(255,255,255,.6);
 
-    .social-icon {
-      text-decoration: none;
-      color: #666;
-      font-size: 14px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      transition: color 0.3s;
-    }
+padding:26px;
+border-radius:28px;
 
-    .social-icon:hover { color: #dc6478; }
+margin-top:22px;
 
-    .copyright {
-      font-size: 12px;
-      opacity: 0.5;
-    }
+box-shadow:
+0 10px 30px rgba(0,0,0,.05);
 
-    /* ANIMAÇÕES */
-    @keyframes heartBeat {
-      0%, 100% { transform: scale(1); }
-      25% { transform: scale(1.1); }
-      50% { transform: scale(1); }
-    }
+transition:.25s;
+}
 
-    @keyframes confetti {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100px) rotate(360deg); opacity: 0; }
-    }
+.card:hover{
+transform:translateY(-2px);
+}
 
-    .confetti-piece {
-      position: fixed;
-      pointer-events: none;
-      animation: confetti 2s ease-out forwards;
-      z-index: 3000;
-    }
+.title{
+font-size:12px;
+letter-spacing:3px;
+text-transform:uppercase;
+font-weight:700;
+opacity:.45;
+margin-bottom:14px;
+}
 
-    /* MODAL */
-    .modal-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.85); display: flex; justify-content: center;
-      align-items: center; z-index: 4000; padding: 20px;
-    }
+.message{
+font-size:28px;
+line-height:1.35;
+font-family:'Playfair Display',serif;
+color:#2d2d2d;
+}
 
-    .modal-content {
-      background: white; padding: 30px; border-radius: 28px;
-      text-align: center; width: 100%; max-width: 400px;
-    }
+.counter{
+font-size:34px;
+font-weight:700;
 
-    audio, video { width: 100%; margin-top: 10px; border-radius: 12px; }
+background:
+linear-gradient(135deg,#dc6478,#ea8da0);
 
-    @media (max-width: 480px) {
-      h1 { font-size: 38px; }
-      .counter { font-size: 24px; }
-    }
-  </style>
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+margin-bottom:10px;
+}
+
+.small{
+font-size:14px;
+color:#777;
+}
+
+/* MUSIC */
+
+.music-player{
+display:flex;
+align-items:center;
+gap:16px;
+}
+
+.music-cover{
+width:68px;
+height:68px;
+border-radius:18px;
+
+background:
+linear-gradient(135deg,#dc6478,#ea8da0);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+color:white;
+font-size:28px;
+
+box-shadow:
+0 10px 25px rgba(220,100,120,.3);
+}
+
+.music-info{
+flex:1;
+}
+
+.song-title{
+font-size:16px;
+font-weight:700;
+margin-bottom:4px;
+}
+
+.song-artist{
+font-size:13px;
+color:#777;
+margin-bottom:10px;
+}
+
+.wave{
+display:flex;
+align-items:flex-end;
+gap:3px;
+height:22px;
+}
+
+.bar{
+width:4px;
+height:6px;
+background:#dc6478;
+border-radius:20px;
+}
+
+.playing .bar{
+animation:wave .9s infinite ease-in-out;
+}
+
+.playing .bar:nth-child(2){animation-delay:.1s;}
+.playing .bar:nth-child(3){animation-delay:.2s;}
+.playing .bar:nth-child(4){animation-delay:.3s;}
+.playing .bar:nth-child(5){animation-delay:.4s;}
+
+@keyframes wave{
+0%,100%{height:6px;}
+50%{height:22px;}
+}
+
+/* BUTTON */
+
+button{
+width:100%;
+
+border:none;
+
+padding:18px;
+
+border-radius:18px;
+
+background:
+linear-gradient(135deg,#dc6478,#ea8da0);
+
+color:white;
+
+font-size:15px;
+font-weight:700;
+
+cursor:pointer;
+
+margin-top:18px;
+
+box-shadow:
+0 10px 25px rgba(220,100,120,.3);
+
+transition:.2s;
+}
+
+button:active{
+transform:scale(.98);
+}
+
+/* FOOTER */
+
+.footer{
+margin-top:50px;
+text-align:center;
+padding-bottom:20px;
+}
+
+.footer-logo{
+width:72px;
+opacity:.7;
+margin-bottom:20px;
+}
+
+.socials{
+display:flex;
+justify-content:center;
+gap:16px;
+margin-bottom:20px;
+}
+
+.social-btn{
+width:54px;
+height:54px;
+
+border-radius:50%;
+
+background:white;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+text-decoration:none;
+
+color:#dc6478;
+
+font-size:22px;
+
+box-shadow:
+0 8px 22px rgba(0,0,0,.08);
+
+transition:.25s;
+}
+
+.social-btn:hover{
+transform:translateY(-3px);
+}
+
+.footer-text{
+font-size:13px;
+color:#888;
+}
+
+/* MODAL */
+
+.modal-overlay{
+position:fixed;
+inset:0;
+
+background:rgba(0,0,0,.85);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+padding:20px;
+
+z-index:99999;
+}
+
+.modal-content{
+background:white;
+
+padding:30px;
+
+border-radius:28px;
+
+max-width:420px;
+width:100%;
+
+text-align:center;
+}
+
+audio,video{
+width:100%;
+margin-top:15px;
+border-radius:14px;
+}
+
+/* CONFETTI */
+
+.confetti{
+position:fixed;
+width:10px;
+height:10px;
+border-radius:50%;
+pointer-events:none;
+animation:fall 2s linear forwards;
+z-index:99999;
+}
+
+@keyframes fall{
+to{
+transform:
+translateY(120vh)
+rotate(720deg);
+
+opacity:0;
+}
+}
+
+@media(max-width:480px){
+
+h1{
+font-size:40px;
+}
+
+.counter{
+font-size:28px;
+}
+
+.message{
+font-size:24px;
+}
+
+}
+
+</style>
 </head>
 <body>
 
-<!-- TELA DE BOAS-VINDAS -->
+<!-- WELCOME -->
+
 <div id="welcome-screen" onclick="startExperience()">
-  <div class="welcome-heart">❤️</div>
-  <div class="welcome-text">Clique para abrir</div>
+
+<div class="welcome-heart">❤️</div>
+
+<div class="welcome-text">
+Clique para abrir
 </div>
 
-<!-- ÁUDIO DE FUNDO -->
+</div>
+
+<!-- AUDIO -->
+
 <audio id="bg-music" loop>
-  <source src="music.mp3" type="audio/mpeg">
+<source src="music.mp3" type="audio/mpeg">
 </audio>
+
+<!-- MAIN -->
 
 <div class="container" id="main-content">
 
-  <div class="hero">
-    <div class="photo">
-      <img src="foto.jpeg" alt="Jessica e Alex">
-    </div>
-    <h1>Jessica ❤️ Alex</h1>
-    <div class="subtitle">Algumas histórias merecem ficar pra sempre.</div>
-  </div>
+<div class="hero">
 
-  <div class="card">
-    <div class="title">Mensagem de hoje</div>
-    <div class="message" id="dailyMessage">carregando...</div>
-  </div>
+<div class="photo">
+<img src="foto-casamento.jpg">
+</div>
 
-  <div class="card">
-    <div class="title">Nosso tempo junto</div>
-    <div class="counter" id="counter">...</div>
-    <div class="small">Desde 24/09/2010</div>
-  </div>
+<h1>Jessica ❤️ Alex</h1>
 
-  <!-- BOTÃO DE MÚSICA COM ONDAS -->
-  <div class="card music-card">
-    <div class="title">Nossa Música</div>
-    <div class="music-player-container" id="player-ui">
-      <div class="song-info">
-        <div class="song-name">Nome da Música - Artista 🎵</div>
-      </div>
-      
-      <div class="wave-container">
-        <div class="wave-bar"></div>
-        <div class="wave-bar"></div>
-        <div class="wave-bar"></div>
-        <div class="wave-bar"></div>
-        <div class="wave-bar"></div>
-      </div>
+<div class="subtitle">
+Algumas histórias merecem ficar pra sempre.
+</div>
 
-      <button id="music-btn" onclick="toggleMusic()">
-        Pausar Música ⏸️
-      </button>
-    </div>
-  </div>
+</div>
 
-  <div class="card">
-    <div class="title">Surpresa</div>
-    <button onclick="triggerSurprise()">Clique para descobrir ✨</button>
-  </div>
+<div class="card">
 
-  <!-- RODAPÉ COM LOGO E REDES -->
-  <div class="footer">
-    <div class="social-links">
-      <a href="https://wa.me/5521983034801" target="_blank" class="social-icon">
-        <i class="fab fa-whatsapp"></i> WhatsApp
-      </a>
-      <a href="https://instagram.com/kusaipresentes" target="_blank" class="social-icon">
-        <i class="fab fa-instagram"></i> Instagram
-      </a>
-    </div>
+<div class="title">
+Mensagem de hoje
+</div>
 
-    <div class="copyright">
-      Feito com ❤️ por Kusai Presentes
-    </div>
+<div class="message" id="dailyMessage">
+Carregando...
+</div>
 
-    <div class="logo-container" style="margin-top: 20px;">
-      <!-- ⭐ SUA LOGO AGORA NO FINAL -->
-      <img src="logo.png" alt="Kusai Presentes" style="max-width: 80px; opacity: 0.6;">
-    </div>
-  </div>
+</div>
+
+<div class="card">
+
+<div class="title">
+Nosso tempo junto
+</div>
+
+<div class="counter" id="counter">
+...
+</div>
+
+<div class="small">
+Desde 24/09/2010
+</div>
+
+</div>
+
+<!-- MUSIC -->
+
+<div class="card">
+
+<div class="title">
+Nossa música
+</div>
+
+<div class="music-player playing" id="music-player">
+
+<div class="music-cover">
+<i class="fa-solid fa-music"></i>
+</div>
+
+<div class="music-info">
+
+<div class="song-title">
+musica
+</div>
+
+<div class="song-artist">
+cantor
+</div>
+
+<div class="wave">
+
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+<div class="bar"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<button id="music-btn" onclick="toggleMusic()">
+Pausar Música ⏸️
+</button>
+
+</div>
+
+<div class="card">
+
+<div class="title">
+Surpresa
+</div>
+
+<button onclick="triggerSurprise()">
+Clique para descobrir ✨
+</button>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+<img src="logo.png" class="footer-logo">
+
+<div class="socials">
+
+<a
+href="https://instagram.com/kusaipresentes"
+target="_blank"
+class="social-btn">
+
+<i class="fab fa-instagram"></i>
+
+</a>
+
+<a
+href="https://wa.me/5521983034801"
+target="_blank"
+class="social-btn">
+
+<i class="fab fa-whatsapp"></i>
+
+</a>
+
+</div>
+
+<div class="footer-text">
+criado com ❤️ por Kusai Presentes
+</div>
+
+</div>
 
 </div>
 
 <script>
-  // 1. CONFIGURAÇÕES
-  const startDate = new Date("2010-09-24");
-  
-  const messages = [
-  "Você é o meu primeiro pensamento do dia.",
-  "Obrigado por ser meu porto seguro.",
-  "Cada detalhe seu me faz te amar mais.",
-  "Você é a melhor parte da minha rotina.",
-  "Com você, o mundo é mais colorido.",
-  "Seu sorriso é o meu combustível.",
-  "Amo a forma como você me olha.",
-  "Você é o meu lugar favorito no mundo.",
-  "Nossa história é a minha preferida.",
-  "Te amar é a decisão mais fácil que já tomei.",
-  "Você faz meu coração bater mais forte.",
-  "Obrigado por compartilhar a vida comigo.",
-  "Você é o meu sonho realizado.",
-  "Ao seu lado, sinto que posso tudo.",
-  "Seu abraço é onde eu sempre quero estar.",
-  "Você é a razão dos meus melhores sorrisos.",
-  "A vida é muito mais bonita com você.",
-  "Amo cada segundo ao seu lado.",
-  "Você é o meu presente de todos os dias.",
-  "Obrigado por me fazer tão feliz.",
-  "Você é a minha pessoa favorita.",
-  "Nada se compara ao nosso amor.",
-  "Você é o meu equilíbrio.",
-  "Amo o nosso jeito de ser.",
-  "Você é a minha melhor escolha.",
-  "Com você, o tempo para.",
-  "Você é a luz dos meus dias.",
-  "Obrigado por ser quem você é.",
-  "Você é o meu lar.",
-  "Te amo mais do que as palavras podem dizer.",
-  "Você é a minha inspiração.",
-  "Amo construir um futuro com você.",
-  "Você é o meu final feliz diário.",
-  "Ao seu lado, tudo faz sentido.",
-  "Você é a minha maior sorte.",
-  "Obrigado por me apoiar em tudo.",
-  "Você é o meu sol em dias nublados.",
-  "Amo a nossa cumplicidade.",
-  "Você é o meu melhor amigo e amor.",
-  "Com você, a vida é uma aventura.",
-  "Você é a minha paz no meio do caos.",
-  "Obrigado por me amar assim.",
-  "Você é o meu destino.",
-  "Amo o som da sua risada.",
-  "Você é a minha metade perfeita.",
-  "Ao seu lado, sou a minha melhor versão.",
-  "Você é o meu tesouro.",
-  "Obrigado por cada momento.",
-  "Você é a minha alegria constante.",
-  "Te amo hoje, amanhã e sempre.",
-  "Você é o meu porto de abrigo.",
-  "Amo a nossa história de amor.",
-  "Você é o meu porto seguro.",
-  "Com você, o amor é simples.",
-  "Você é a minha maior conquista.",
-  "Obrigado por me fazer acreditar no amor.",
-  "Você é o meu anjo na terra.",
-  "Amo o seu jeito de cuidar de mim.",
-  "Você é a minha alma gêmea.",
-  "Ao seu lado, o paraíso é aqui.",
-  "Você é o meu mundo.",
-  "Obrigado por ser meu parceiro de vida.",
-  "Você é a minha felicidade.",
-  "Te amo além do infinito.",
-  "Você é o meu refúgio.",
-  "Amo a nossa conexão.",
-  "Você é o meu tudo.",
-  "Com você, a vida tem mais sabor.",
-  "Você é a minha estrela guia.",
-  "Obrigado por iluminar minha vida.",
-  "Você é o meu porto de paz.",
-  "Amo o nosso amor.",
-  "Você é a minha vida.",
-  "Ao seu lado, sou completo.",
-  "Você é o meu maior presente.",
-  "Obrigado por me fazer sorrir.",
-  "Você é a minha razão de viver.",
-  "Te amo com todo o meu coração.",
-  "Você é o meu porto de luz.",
-  "Amo a nossa jornada.",
-  "Você é o meu porto de esperança.",
-  "Com você, o futuro é brilhante.",
-  "Você é a minha força.",
-  "Obrigado por estar sempre aqui.",
-  "Você é o meu porto de alegria.",
-  "Amo o seu coração.",
-  "Você é a minha joia rara.",
-  "Ao seu lado, a vida é um sonho.",
-  "Você é o meu porto de carinho.",
-  "Obrigado por me entender.",
-  "Você é a minha essência.",
-  "Te amo em cada detalhe.",
-  "Você é o meu porto de ternura.",
-  "Amo a nossa união.",
-  "Você é o meu porto de afeto.",
-  "Com você, o amor transborda.",
-  "Você é a minha motivação.",
-  "Obrigado por me inspirar.",
-  "Você é o meu porto de amizade.",
-  "Amo o seu sorriso.",
-  "Você é a minha paixão.",
-  "Ao seu lado, o tempo voa.",
-  "Você é o meu porto de paixão.",
-  "Obrigado por me fazer sentir especial.",
-  "Você é a minha vida inteira.",
-  "Te amo daqui até a lua.",
-  "Você é o meu porto de doçura.",
-  "Amo a nossa sintonia.",
-  "Você é o meu porto de encanto.",
-  "Com você, a vida é mágica.",
-  "Você é a minha admiração.",
-  "Obrigado por ser meu amor.",
-  "Você é o meu porto de magia.",
-  "Amo o seu olhar.",
-  "Você é a minha gratidão.",
-  "Ao seu lado, tudo é possível.",
-  "Você é o meu porto de gratidão.",
-  "Obrigado por me escolher.",
-  "Você é a minha serenidade.",
-  "Te amo em todas as línguas.",
-  "Você é o meu porto de serenidade.",
-  "Amo a nossa cumplicidade.",
-  "Você é o meu porto de calma.",
-  "Com você, a vida é tranquila.",
-  "Você é a minha harmonia.",
-  "Obrigado por me trazer paz.",
-  "Você é o meu porto de harmonia.",
-  "Amo o seu toque.",
-  "Você é a minha proteção.",
-  "Ao seu lado, sinto-me seguro.",
-  "Você é o meu porto de proteção.",
-  "Obrigado por me cuidar.",
-  "Você é a minha confiança.",
-  "Te amo em cada batida do coração.",
-  "Você é o meu porto de confiança.",
-  "Amo a nossa lealdade.",
-  "Você é o meu porto de lealdade.",
-  "Com você, o amor é eterno.",
-  "Você é a minha fidelidade.",
-  "Obrigado por ser fiel a nós.",
-  "Você é o meu porto de fidelidade.",
-  "Amo o seu caráter.",
-  "Você é a minha admiração profunda.",
-  "Ao seu lado, a vida é plena.",
-  "Você é o meu porto de plenitude.",
-  "Obrigado por me completar.",
-  "Você é a minha realização.",
-  "Te amo mais que ontem.",
-  "Você é o meu porto de realização.",
-  "Amo a nossa história.",
-  "Você é o meu porto de memórias.",
-  "Com você, cada dia é inesquecível.",
-  "Você é a minha saudade boa.",
-  "Obrigado por criar memórias comigo.",
-  "Você é o meu porto de sonhos.",
-  "Amo o seu jeito de sonhar.",
-  "Você é a minha realidade mais linda.",
-  "Ao seu lado, os sonhos se realizam.",
-  "Você é o meu porto de realidade.",
-  "Obrigado por ser real.",
-  "Você é a minha verdade.",
-  "Te amo de corpo e alma.",
-  "Você é o meu porto de verdade.",
-  "Amo a nossa transparência.",
-  "Você é o meu porto de sinceridade.",
-  "Com você, a vida é autêntica.",
-  "Você é a minha autenticidade.",
-  "Obrigado por ser você mesmo.",
-  "Você é o meu porto de autenticidade.",
-  "Amo a sua essência.",
-  "Você é a minha luz própria.",
-  "Ao seu lado, eu brilho.",
-  "Você é o meu porto de brilho.",
-  "Obrigado por me fazer brilhar.",
-  "Você é a minha energia.",
-  "Te amo com toda a minha força.",
-  "Você é o meu porto de energia.",
-  "Amo a nossa vibração.",
-  "Você é o meu porto de vibração.",
-  "Com você, a vida é vibrante.",
-  "Você é a minha vitalidade.",
-  "Obrigado por me dar vida.",
-  "Você é o meu porto de vitalidade.",
-  "Amo o seu entusiasmo.",
-  "Você é a minha inspiração diária.",
-  "Ao seu lado, a vida é inspiradora.",
-  "Você é o meu porto de inspiração.",
-  "Obrigado por me motivar.",
-  "Você é a minha coragem.",
-  "Te amo em cada desafio.",
-  "Você é o meu porto de coragem.",
-  "Amo a nossa resiliência.",
-  "Você é o meu porto de resiliência.",
-  "Com você, superamos tudo.",
-  "Você é a minha superação.",
-  "Obrigado por lutar por nós.",
-  "Você é o meu porto de superação.",
-  "Amo a nossa vitória.",
-  "Você é a minha conquista diária.",
-  "Ao seu lado, sou um vencedor.",
-  "Você é o meu porto de vitória.",
-  "Obrigado por vencermos juntos.",
-  "Você é a minha glória.",
-  "Te amo em cada conquista.",
-  "Você é o meu porto de glória.",
-  "Amo o nosso sucesso.",
-  "Você é o meu porto de sucesso.",
-  "Com você, a vida é próspera.",
-  "Você é a minha prosperidade.",
-  "Obrigado por prosperarmos juntos.",
-  "Você é o meu porto de prosperidade.",
-  "Amo a nossa abundância.",
-  "Você é a minha riqueza.",
-  "Ao seu lado, sou rico de amor.",
-  "Você é o meu porto de riqueza.",
-  "Obrigado por me enriquecer.",
-  "Você é a minha fortuna.",
-  "Te amo mais que qualquer tesouro.",
-  "Você é o meu porto de fortuna.",
-  "Amo o nosso valor.",
-  "Você é o meu porto de valor.",
-  "Com você, a vida tem valor.",
-  "Você é a minha preciosidade.",
-  "Obrigado por me valorizar.",
-  "Você é o meu porto de preciosidade.",
-  "Amo a sua raridade.",
-  "Você é a minha exclusividade.",
-  "Ao seu lado, sou único.",
-  "Você é o meu porto de exclusividade.",
-  "Obrigado por me fazer único.",
-  "Você é a minha singularidade.",
-  "Te amo de um jeito singular.",
-  "Você é o meu porto de singularidade.",
-  "Amo a nossa diferença.",
-  "Você é o meu porto de diferença.",
-  "Com você, ser diferente é bom.",
-  "Você é a minha originalidade.",
-  "Obrigado por ser original.",
-  "Você é o meu porto de originalidade.",
-  "Amo a sua criatividade.",
-  "Você é a minha arte.",
-  "Ao seu lado, a vida é uma obra de arte.",
-  "Você é o meu porto de arte.",
-  "Obrigado por colorir minha vida.",
-  "Você é a minha poesia.",
-  "Te amo em cada verso.",
-  "Você é o meu porto de poesia.",
-  "Amo a nossa rima.",
-  "Você é o meu porto de rima.",
-  "Com você, a vida é poética.",
-  "Você é a minha melodia.",
-  "Obrigado por ser minha música.",
-  "Você é o meu porto de melodia.",
-  "Amo o nosso ritmo.",
-  "Você é a minha dança.",
-  "Ao seu lado, eu danço com a vida.",
-  "Você é o meu porto de dança.",
-  "Obrigado por dançar comigo.",
-  "Você é a minha harmonia perfeita.",
-  "Te amo em cada nota.",
-  "Você é o meu porto de harmonia.",
-  "Amo o nosso som.",
-  "Você é o meu porto de som.",
-  "Com você, o silêncio é bom.",
-  "Você é a minha quietude.",
-  "Obrigado por respeitar meu silêncio.",
-  "Você é o meu porto de quietude.",
-  "Amo a nossa paz.",
-  "Você é a minha tranquilidade absoluta.",
-  "Ao seu lado, o mundo se acalma.",
-  "Você é o meu porto de tranquilidade.",
-  "Obrigado por me acalmar.",
-  "Você é a minha calma.",
-  "Te amo em cada suspiro.",
-  "Você é o meu porto de calma.",
-  "Amo a nossa leveza.",
-  "Você é o meu porto de leveza.",
-  "Com você, a vida é leve.",
-  "Você é a minha suavidade.",
-  "Obrigado por ser suave comigo.",
-  "Você é o meu porto de suavidade.",
-  "Amo o seu carinho.",
-  "Você é a minha doçura infinita.",
-  "Ao seu lado, a vida é doce.",
-  "Você é o meu porto de doçura.",
-  "Obrigado por me adoçar.",
-  "Você é a minha ternura.",
-  "Te amo com toda a minha ternura.",
-  "Você é o meu porto de ternura.",
-  "Amo o nosso afeto.",
-  "Você é o meu porto de afeto.",
-  "Com você, o afeto é real.",
-  "Você é a minha amizade verdadeira.",
-  "Obrigado por ser meu melhor amigo.",
-  "Você é o meu porto de amizade.",
-  "Amo a nossa parceria.",
-  "Você é a minha cumplicidade eterna.",
-  "Ao seu lado, somos um time.",
-  "Você é o meu porto de cumplicidade.",
-  "Obrigado por ser meu parceiro.",
-  "Você é a minha lealdade sem fim.",
-  "Te amo com toda a minha lealdade.",
-  "Você é o meu porto de lealdade.",
-  "Amo a nossa fidelidade.",
-  "Você é o meu porto de fidelidade.",
-  "Com você, a fidelidade é natural.",
-  "Você é a minha confiança plena.",
-  "Obrigado por confiar em mim.",
-  "Você é o meu porto de confiança.",
-  "Amo a nossa segurança.",
-  "Você é a minha proteção constante.",
-  "Ao seu lado, nada me atinge.",
-  "Você é o meu porto de proteção.",
-  "Obrigado por me proteger.",
-  "Você é a minha força interior.",
-  "Te amo com toda a minha força.",
-  "Você é o meu porto de força.",
-  "Amo a nossa coragem.",
-  "Você é o meu porto de coragem.",
-  "Com você, enfrento qualquer medo.",
-  "Você é a minha bravura.",
-  "Obrigado por ser bravo por nós.",
-  "Você é o meu porto de bravura.",
-  "Amo a nossa determinação.",
-  "Você é a minha vontade de vencer.",
-  "Ao seu lado, eu conquisto o mundo.",
-  "Você é o meu porto de determinação.",
-  "Obrigado por não desistir de nós.",
-  "Você é a minha persistência.",
-  "Te amo em cada tentativa.",
-  "Você é o meu porto de persistência.",
-  "Amo a nossa resiliência.",
-  "Você é o meu porto de resiliência.",
-  "Com você, eu me levanto sempre.",
-  "Você é a minha superação diária.",
-  "Obrigado por me ajudar a superar.",
-  "Você é o meu porto de superação.",
-  "Amo a nossa evolução.",
-  "Você é o meu crescimento.",
-  "Ao seu lado, eu evoluo.",
-  "Você é o meu porto de crescimento.",
-  "Obrigado por crescer comigo.",
-  "Você é a minha maturidade.",
-  "Te amo com toda a minha maturidade.",
-  "Você é o meu porto de maturidade.",
-  "Amo a nossa sabedoria.",
-  "Você é o meu porto de sabedoria.",
-  "Com você, eu aprendo sempre.",
-  "Você é o meu conhecimento.",
-  "Obrigado por me ensinar sobre o amor.",
-  "Você é o meu porto de conhecimento.",
-  "Amo a nossa inteligência.",
-  "Você é a minha mente brilhante.",
-  "Ao seu lado, eu penso melhor.",
-  "Você é o meu porto de inteligência.",
-  "Obrigado por me desafiar.",
-  "Você é a minha criatividade sem limites.",
-  "Te amo em cada ideia.",
-  "Você é o meu porto de criatividade.",
-  "Amo a nossa inovação.",
-  "Você é o meu porto de inovação.",
-  "Com você, a vida é nova todo dia.",
-  "Você é a minha renovação.",
-  "Obrigado por me renovar.",
-  "Você é o meu porto de renovação.",
-  "Amo a nossa esperança.",
-  "Você é o meu futuro.",
-  "Ao seu lado, o futuro é lindo.",
-  "Você é o meu porto de futuro.",
-  "Obrigado por fazer parte do meu amanhã.",
-  "Você é a minha eternidade.",
-  "Te amo para todo o sempre.",
-  "Você é o meu porto de eternidade.",
-  "Amo o nosso 'para sempre'.",
-  "Você é o meu porto de infinito.",
-  "Com você, o amor não tem fim.",
-  "Você é a minha imensidão.",
-  "Obrigado por ser imenso.",
-  "Você é o meu porto de imensidão.",
-  "Amo a nossa profundidade.",
-  "Você é o meu oceano de amor.",
-  "Ao seu lado, eu mergulho fundo.",
-  "Você é o meu porto de profundidade.",
-  "Obrigado por me amar profundamente.",
-  "Você é a minha intensidade.",
-  "Te amo com toda a minha intensidade.",
-  "Você é o meu porto de intensidade.",
-  "Amo a nossa paixão.",
-  "Você é o meu porto de paixão.",
-  "Com você, o fogo nunca apaga.",
-  "Você é o meu desejo.",
-  "Obrigado por me desejar.",
-  "Você é o meu porto de desejo.",
-  "Amo a nossa atração.",
-  "Você é o meu magnetismo.",
-  "Ao seu lado, eu sou atraído.",
-  "Você é o meu porto de magnetismo.",
-  "Obrigado por me atrair.",
-  "Você é a minha química perfeita.",
-  "Te amo em cada reação.",
-  "Você é o meu porto de química.",
-  "Amo a nossa conexão física.",
-  "Você é o meu porto de toque.",
-  "Com você, o toque é mágico.",
-  "Você é o meu beijo favorito.",
-  "Obrigado por cada beijo.",
-  "Você é o meu porto de beijos.",
-  "Amo o seu cheiro.",
-  "Você é o meu perfume.",
-  "Ao seu lado, a vida é cheirosa.",
-  "Você é o meu porto de perfume.",
-  "Obrigado por perfumar meus dias.",
-  "Você é a minha essência vital.",
-  "Te amo com todo o meu ser.",
-  "Você é o meu porto de ser.",
-  "Amo a nossa existência.",
-  "Você é o meu porto de vida.",
-  "Com você, viver vale a pena.",
-  "Você é a minha razão de ser.",
-  "Obrigado por existir.",
-  "Você é o meu porto de existência.",
-  "Amo o nosso destino traçado.",
-  "Você é o meu encontro marcado.",
-  "Ao seu lado, eu me encontrei.",
-  "Você é o meu porto de encontro.",
-  "Obrigado por me encontrar.",
-  "Você é a minha sorte grande.",
-  "Te amo mais que tudo no mundo.",
-  "Você é o meu porto de sorte.",
-  "Amo a nossa história sem fim.",
-  "Você é o meu 'era uma vez' real.",
-  "Com você, o conto de fadas é verdade.",
-  "Você é o meu final feliz.",
-  "Obrigado por ser meu final feliz.",
-  "Você é o meu porto de felicidade eterna."
+
+const startDate = new Date(2010,8,24);
+
+const messages = [
+
+"Você ainda é meu lugar favorito.",
+"Seu abraço continua sendo minha paz.",
+"Com você, tudo faz sentido.",
+"Obrigado por existir na minha vida.",
+"Eu escolheria você de novo.",
+"Nosso amor mora nos detalhes.",
+"Você faz o mundo parecer mais leve.",
+"Até nos dias difíceis, ainda é você."
+
 ];
 
-  const specialDates = {
-    "06-12": "Feliz Dia dos Namorados! ❤️",
-    "09-24": "Hoje é nosso aniversário! 🥂",
-    "12-25": "Feliz Natal, meu amor! 🎄",
-    "01-01": "Mais um ano começando ao seu lado. ✨",
-    "05-23": "Está dando certo! 😍"
-  };
+const surprises = [
 
-  const surprises = [
-    { type: "text", content: "Você é a melhor parte dos meus dias. ❤️" },
-    { type: "audio", content: "audio.mp3", title: "Uma mensagem pra você 🎙️" },
-    { type: "video", content: "video.mp4", title: "Nossos momentos 🎥" },
-    { type: "text", content: "Prometo continuar escolhendo você todos os dias." }
-  ];
+{
+type:"text",
+content:"Você é a melhor parte dos meus dias ❤️"
+},
 
-  // 2. FUNÇÕES DE INICIALIZAÇÃO
-  function startExperience() {
-    const music = document.getElementById('bg-music');
-    music.play().catch(e => console.log("Erro ao tocar áudio:", e));
-    
-    document.getElementById('player-ui').classList.add('playing');
+{
+type:"audio",
+content:"audio.mp3",
+title:"Uma mensagem pra você 🎙️"
+},
 
-    const welcome = document.getElementById('welcome-screen');
-    welcome.style.opacity = '0';
-    welcome.style.visibility = 'hidden';
+{
+type:"video",
+content:"video.mp4",
+title:"Nossos momentos 🎥"
+}
 
-    document.getElementById('main-content').classList.add('visible');
-    
-    loadDailyMessage();
-    updateCounter();
-  }
+];
 
-  function toggleMusic() {
-    const music = document.getElementById('bg-music');
-    const btn = document.getElementById('music-btn');
-    const playerUI = document.getElementById('player-ui');
-    
-    if (music.paused) {
-      music.play();
-      btn.innerText = "Pausar Música ⏸️";
-      playerUI.classList.add('playing');
-    } else {
-      music.pause();
-      btn.innerText = "Tocar Música ▶️";
-      playerUI.classList.remove('playing');
-    }
-  }
+function startExperience(){
 
-  function loadDailyMessage() {
-    const now = new Date();
-    const dateKey = `${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-    
-    if (specialDates[dateKey]) {
-      document.getElementById("dailyMessage").innerText = specialDates[dateKey];
-    } else {
-      const start = new Date(now.getFullYear(), 0, 0);
-      const dayOfYear = Math.floor((now - start) / (1000 * 60 * 60 * 24));
-      document.getElementById("dailyMessage").innerText = messages[dayOfYear % messages.length];
-    }
-  }
+const music =
+document.getElementById('bg-music');
 
-  function updateCounter() {
-    const now = new Date();
-    const diff = now - startDate;
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const years = Math.floor(days / 365);
-    const months = Math.floor((days % 365) / 30);
-    const remDays = days % 30;
-    document.getElementById("counter").innerText = `${years} anos, ${months} meses e ${remDays} dias`;
-  }
+music.play().catch(()=>{});
 
-  // 3. SURPRESAS E EFEITOS
-  function triggerSurprise() {
-    const item = surprises[Math.floor(Math.random() * surprises.length)];
-    createConfetti();
-    showModal(item);
-  }
+document
+.getElementById('welcome-screen')
+.style.opacity='0';
 
-  function createConfetti() {
-    const colors = ['#dc6478', '#e8839a', '#f5b3c1', '#ffd4e5'];
-    for (let i = 0; i < 30; i++) {
-      const c = document.createElement('div');
-      c.className = 'confetti-piece';
-      c.style.left = Math.random() * 100 + '%';
-      c.style.top = '-10px';
-      c.style.width = c.style.height = Math.random() * 8 + 4 + 'px';
-      c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      c.style.borderRadius = '50%';
-      document.body.appendChild(c);
-      setTimeout(() => c.remove(), 2000);
-    }
-  }
+document
+.getElementById('welcome-screen')
+.style.visibility='hidden';
 
-  function showModal(item) {
-    const overlay = document.createElement('div');
-    overlay.className = 'modal-overlay';
-    
-    const content = document.createElement('div');
-    content.className = 'modal-content';
+document
+.getElementById('main-content')
+.classList.add('visible');
 
-    let html = '';
-    if (item.type === "text") html = `<p style="font-size: 24px; font-family: 'Cormorant Garamond', serif;">${item.content}</p>`;
-    else if (item.type === "audio") html = `<h3>${item.title}</h3><audio controls autoplay><source src="${item.content}"></audio>`;
-    else if (item.type === "video") html = `<h3>${item.title}</h3><video controls autoplay><source src="${item.content}"></video>`;
+loadDailyMessage();
 
-    content.innerHTML = html;
-    const btn = document.createElement('button');
-    btn.innerText = 'Fechar ❤️';
-    btn.style.marginTop = '20px';
-    btn.onclick = () => overlay.remove();
-    
-    content.appendChild(btn);
-    overlay.appendChild(content);
-    document.body.appendChild(overlay);
-  }
+updateCounter();
+
+}
+
+function toggleMusic(){
+
+const music =
+document.getElementById('bg-music');
+
+const btn =
+document.getElementById('music-btn');
+
+const player =
+document.getElementById('music-player');
+
+if(music.paused){
+
+music.play();
+
+btn.innerHTML =
+'Pausar Música ⏸️';
+
+player.classList.add('playing');
+
+}else{
+
+music.pause();
+
+btn.innerHTML =
+'Tocar Música ▶️';
+
+player.classList.remove('playing');
+
+}
+
+}
+
+function loadDailyMessage(){
+
+const now = new Date();
+
+const day =
+Math.floor(
+(now - new Date(now.getFullYear(),0,0))
+/ 86400000
+);
+
+document
+.getElementById('dailyMessage')
+.innerText =
+messages[day % messages.length];
+
+}
+
+function updateCounter(){
+
+const now = new Date();
+
+let years =
+now.getFullYear() -
+startDate.getFullYear();
+
+let months =
+now.getMonth() -
+startDate.getMonth();
+
+let days =
+now.getDate() -
+startDate.getDate();
+
+if(days < 0){
+
+months--;
+
+const lastMonth =
+new Date(
+now.getFullYear(),
+now.getMonth(),
+0
+).getDate();
+
+days += lastMonth;
+
+}
+
+if(months < 0){
+
+years--;
+months += 12;
+
+}
+
+document
+.getElementById('counter')
+.innerText =
+`${years} anos, ${months} meses e ${days} dias`;
+
+}
+
+function triggerSurprise(){
+
+createConfetti();
+
+const item =
+surprises[
+Math.floor(
+Math.random() * surprises.length
+)
+];
+
+showModal(item);
+
+}
+
+function createConfetti(){
+
+const colors =
+['#dc6478','#ea8da0','#ffd1dc'];
+
+for(let i=0;i<40;i++){
+
+const el =
+document.createElement('div');
+
+el.className='confetti';
+
+el.style.left =
+Math.random()*100+'vw';
+
+el.style.background =
+colors[
+Math.floor(
+Math.random()*colors.length
+)
+];
+
+el.style.animationDuration =
+(Math.random()*2+1)+'s';
+
+document.body.appendChild(el);
+
+setTimeout(()=>{
+el.remove();
+},3000);
+
+}
+
+}
+
+function showModal(item){
+
+const overlay =
+document.createElement('div');
+
+overlay.className =
+'modal-overlay';
+
+const content =
+document.createElement('div');
+
+content.className =
+'modal-content';
+
+let html='';
+
+if(item.type==='text'){
+
+html =
+`<p style="font-size:28px;font-family:'Playfair Display',serif;">
+${item.content}
+</p>`;
+
+}
+
+if(item.type==='audio'){
+
+html =
+`<h3>${item.title}</h3>
+<audio controls autoplay>
+<source src="${item.content}">
+</audio>`;
+
+}
+
+if(item.type==='video'){
+
+html =
+`<h3>${item.title}</h3>
+<video controls autoplay>
+<source src="${item.content}">
+</video>`;
+
+}
+
+content.innerHTML = html;
+
+const btn =
+document.createElement('button');
+
+btn.innerText =
+'Fechar ❤️';
+
+btn.onclick =
+()=>overlay.remove();
+
+content.appendChild(btn);
+
+overlay.appendChild(content);
+
+document.body.appendChild(overlay);
+
+}
+
 </script>
 
 </body>
