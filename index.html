@@ -154,6 +154,13 @@ button:active { transform:scale(0.95); }
   box-shadow:0 12px 30px rgba(220,100,120,.3);
   color:#c23d5e;
 }
+  
+.music-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+  
 
 /* Modal */
 .modal-overlay {
@@ -217,7 +224,12 @@ button:active { transform:scale(0.95); }
         </div>
       </div>
     </div>
-    <button id="music-btn" onclick="toggleMusic()">⏸️ Pausar Música</button>
+    <button id="music-btn" onclick="toggleMusic()">
+  <svg id="music-icon" width="20" height="20" viewBox="0 0 24 24" fill="white">
+    <rect x="6" y="4" width="4" height="16"/>
+    <rect x="14" y="4" width="4" height="16"/>
+  </svg>
+</button>
   </div>
 
   <div class="card">
@@ -345,16 +357,15 @@ function startExperience(){
 
 function toggleMusic(){
   const music = document.getElementById('bg-music');
-  const btn = document.getElementById('music-btn');
+  const icon = document.getElementById('music-icon');
   const player = document.getElementById('music-player');
-
   if(music.paused){
     music.play();
-    btn.innerHTML = '⏸️ Pausar Música';
+    icon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
     player.classList.add('playing');
   } else {
     music.pause();
-    btn.innerHTML = '▶️ Tocar Música';
+    icon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
     player.classList.remove('playing');
   }
 }
