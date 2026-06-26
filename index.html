@@ -553,7 +553,7 @@ function showModal(item){
   if(bgMusic && !bgMusic.paused){
     bgMusic.pause();
 
-    if(btn) btn.innerHTML = '▶️ Tocar Música';
+    if(btn) btn.innerHTML = '<svg id="music-icon" width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
     if(player) player.classList.remove('playing');
   }
 
@@ -574,7 +574,7 @@ function showModal(item){
     const player = document.getElementById('music-player');
     if (bgMusic && !bgMusic.paused) {
       bgMusic.pause();
-      if (btn) btn.innerHTML = '▶️ Tocar Música';
+      if(btn) btn.innerHTML = '<svg id="music-icon" width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
       if (player) player.classList.remove('playing');
     }
     html = `<h3>${item.title}</h3><video autoplay controls playsinline style="width:100%; max-height:58vh; border-radius:12px; background:#000;"><source src="${item.content}" type="video/mp4"></video>`;
