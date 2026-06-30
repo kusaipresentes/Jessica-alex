@@ -92,6 +92,12 @@ h1 {
   background:linear-gradient(135deg,#dc6478,#ea8da0); 
   -webkit-background-clip:text; -webkit-text-fill-color:transparent; 
   margin-bottom:10px; 
+  cursor:pointer;
+  user-select:none;
+}
+.counter-detalhes {
+  margin-top:10px; font-size:16px; font-weight:600;
+  color:#dc6478;
 }
 
 /* Música + Ondas */
@@ -203,9 +209,10 @@ button:active { transform:scale(0.95); }
 
   <div class="card">
     <div class="title">Nosso tempo junto</div>
-    <div class="counter" id="counter">...</div>
-    <div class="small">Desde 27/09/2010</div>
-  </div>
+    <div class="counter" id="counter" onclick="toggleDetalhes()">...</div>
+    <div class="small">Desde 27/09/2010 · toque para ver detalhes</div>
+    <div class="counter-detalhes" id="counterDetalhes" style="display:none;"></div>
+</div>
 
   <!-- MÚSICA -->
   <div class="card">
@@ -441,6 +448,23 @@ function loadDailyMessage() {
     selectedMessage;
 }
 
+let counterExpanded = false;
+let counterInterval = null;
+
+function toggleDetalhes(){
+  counterExpanded = !counterExpanded;
+  const detalhes = document.getElementById('counterDetalhes');
+
+  if(counterExpanded){
+    detalhes.style.display = 'block';
+    updateCounter();
+    counterInterval = setInterval(updateCounter, 1000);
+  } else {
+    detalhes.style.display = 'none';
+    clearInterval(counterInterval);
+  }
+}
+
 function updateCounter(){
   const now = new Date();
   let years = now.getFullYear() - startDate.getFullYear();
@@ -449,6 +473,13 @@ function updateCounter(){
   if(days < 0){ months--; days += new Date(now.getFullYear(), now.getMonth(), 0).getDate(); }
   if(months < 0){ years--; months += 12; }
   document.getElementById('counter').innerText = `${years} anos, ${months} meses e ${days} dias`;
+
+  if(counterExpanded){
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+    document.getElementById('counterDetalhes').innerText = `${hours}h ${minutes}min ${seconds}s`;
+  }
 }
 
 function triggerSurprise(){
